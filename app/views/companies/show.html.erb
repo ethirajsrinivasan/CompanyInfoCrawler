@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>Home page:</strong>
+  <%= @company.home_page %>
+</p>
+
+<p>
+  <strong>Verified:</strong>
+  <%= @company.verified %>
+</p>
+
+<%= link_to 'Extract Content', scrap_content_company_path(@company), method: :put %> |
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
