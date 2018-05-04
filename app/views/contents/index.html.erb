@@ -1,0 +1,5 @@
+<%= form_tag("/contents/search", method: "get") do %>
+  <%= text_field_tag(:query) %>
+  <%= select_tag(:company_id, options_for_select(Company.all.map { |com| [com.name, com.id] })) %>
+  <%= submit_tag "search" %>
+<% end %>
