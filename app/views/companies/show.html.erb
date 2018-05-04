@@ -11,9 +11,16 @@
 </p>
 
 <p>
+  <strong>Description:</strong>
+  <%= @company.description %>
+</p>
+
+
+<p>
   <strong>Verified:</strong>
   <%= @company.verified %>
 </p>
+
 
 <%= link_to 'Extract Content', scrap_content_company_path(@company), method: :put %> |
 

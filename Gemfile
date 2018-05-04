@@ -66,3 +66,5 @@ gem  'elasticsearch-model'
 gem  'elasticsearch-rails'
 
 gem 'searchkick'
+
+gem 'will_paginate'
