@@ -11,22 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :company_name %>
+    <%= form.text_field :name, id: :company_name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :home_page %>
-    <%= form.text_field :home_page, id: :company_home_page %>
+    <%= form.text_field :home_page, id: :company_home_page, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :verified %>
-    <%= form.check_box :verified, id: :company_verified %>
+  <div class="form-check">
+    <%= form.check_box :verified, id: :company_verified, class: "form-check-input" %>
+    <%= form.label :verified, class: "form-check-label" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: "btn btn-primary" %>
 <% end %>

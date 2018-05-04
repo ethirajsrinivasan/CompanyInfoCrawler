@@ -1,8 +1,14 @@
-<%= form_tag("/contents/search", method: "get") do %>
-  <%= text_field_tag(:query) %>
-  <%= select_tag(:company_id, options_for_select(Company.all.map { |com| [com.name, com.id] })) %>
-  <%= submit_tag "search" %>
+<div class="content_search">
+<%= form_tag("/contents/search", method: "get", class: "form-inline") do %>
+  <%= text_field_tag :query, nil ,class: "form-control", placeholder: "Query" %>
+  <%= select_tag(:company_id, options_for_select(Company.all.map { |com| [com.name, com.id] }), {class: "form-control"}) %>
+  <%= submit_tag "search", class: "btn btn-primary" %>
 <% end %>
+</div>
 <% @contents.each do |content| %>
-	<%= content.data %>
+	<div class="card">
+	  <div class="card-body">
+		<%= content.data %>
+	  </div>
+	</div>
 <% end %>
