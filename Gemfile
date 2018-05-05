@@ -68,3 +68,7 @@ gem  'elasticsearch-rails'
 gem 'searchkick'
 
 gem 'will_paginate'
+
+gem 'lda-ruby', '~> 0.3.9'
+gem 'tf-idf-similarity', '~> 0.1.5'
+gem 'carrot2'

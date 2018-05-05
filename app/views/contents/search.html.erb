@@ -4,11 +4,20 @@
 	  <%= select_tag(:company_id, options_for_select(Company.all.map { |com| [com.name, com.id] }), {class: "form-control"}) %>
 	  <%= submit_tag "search", class: "btn btn-primary" %>
 	<% end %>
-	<% @contents.each do |content| %>
-		<div class="card">
-		  <div class="card-body">
-			<%= content %>
-		  </div>
-		</div>
+	<div class="card">
+		<div class="card-header">LDA Keywords</div>
+	  <div class="card-body">
+		<% @topics.each do |topic| %>
+			<span class="badge badge-primary"><%= topic %></span>
+		<% end %>
+	  </div>
+	</div>
+
+	<% @clustered_documents.each do |k,v| %>
+	<div class="card">
+	  <div class="card-body">
+		<%= @contents[k] %>
+	  </div>
+	</div>
 	<% end %>
 </div>
