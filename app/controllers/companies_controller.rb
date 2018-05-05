@@ -26,6 +26,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.description = MetaInspector.new(@company.home_page).best_description
+    @company.metadata = MetaInspector.new(@company.home_page).meta
     respond_to do |format|
       if @company.save
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
@@ -41,6 +42,7 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1.json
   def update
     @company.description = MetaInspector.new(@company.home_page).best_description
+    @company.metadata = MetaInspector.new(@company.home_page).meta
     respond_to do |format|
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
