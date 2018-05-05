@@ -4,21 +4,21 @@
 	  <%= select_tag(:company_id, options_for_select(Company.all.map { |com| [com.name, com.id] }), {class: "form-control"}) %>
 	  <%= select_tag(:method_id, options_for_select([["Cluster Mean", 0],["Raw Document", 1]]), class: "form-control") %>
 	  <%= submit_tag "search", class: "btn btn-primary" %>
+	  <%= link_to "Download", search_contents_path(query: params[:query],method_id: params[:method_id], company_id: params[:company_id], format: :csv), class: "btn btn-primary" %>
 	<% end %>
 	<div class="card">
 		<div class="card-header">LDA Keywords</div>
 	  <div class="card-body">
-		<% @topics.each do |topic| %>
+		<% @topics.try(:each) do |topic| %>
 			<span class="badge badge-primary"><%= topic %></span>
 		<% end %>
 	  </div>
 	</div>
 
     
-	<% @contents.each do |content| %>
+	<% @contents.try(:each) do |content| %>
 	<div class="card">
 	  <div class="card-body">
-	  	<%= "hi" %>
 		<%= content %>
 	  </div>
 	</div>

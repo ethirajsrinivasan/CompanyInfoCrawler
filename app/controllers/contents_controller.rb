@@ -8,6 +8,7 @@ class ContentsController < ApplicationController
 	def search
 		@contents = Content.search params["query"], where: {company_id: params[:company_id].to_i}
 		@contents = @contents.map(&:data).uniq
+		return if @contents == []
 		corpus = Lda::Corpus.new
 		@contents.each do |content|
 			corpus.add_document(Lda::TextDocument.new(corpus, content))
@@ -35,6 +36,10 @@ class ContentsController < ApplicationController
 				@contents[doc]
 			end
 		end
+		respond_to do |format|
+	      format.html
+	      format.csv { send_data Content.to_csv(@contents,params[:query]), filename: "#{Company.find(params[:company_id]).name} #{params[:query]}.csv" }
+		end
 	end
 
 
@@ -47,5 +52,9 @@ class ContentsController < ApplicationController
 			.each_with_index
 			.map { |x,i| [i,x.sum] }
 			.sort_by(&:last).reverse.map(&:first)[0..1]
+	end
+
+	def download
+		puts params
 	end
 end
