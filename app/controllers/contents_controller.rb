@@ -18,19 +18,23 @@ class ContentsController < ApplicationController
 		lda.em('random')
 		topics = lda.top_words(20)
 		@topics = topics.values.flatten.select { |word| word.length > 2}
-		carrot2 = Carrot2.new
-		clusters = carrot2.cluster(@contents)["clusters"]
-		doc_clusters = clusters.to_a.map { |val| val["documents"] }
-		p (doc_clusters)
-		@clustered_documents_map = doc_clusters.map do |cluster|
-			get_mean_documents(cluster.map(&:to_i))			
-		end
-		@clustered_documents = @clustered_documents_map.each_with_index.map do |cluster,i|
-			cluster.map do |doc|
-				doc_clusters[i][doc].to_i
+		if params[:method_id].to_i == 0
+			carrot2 = Carrot2.new
+			clusters = carrot2.cluster(@contents)["clusters"]
+			doc_clusters = clusters.to_a.map { |val| val["documents"] }
+			@clustered_documents_map = doc_clusters.map do |cluster|
+				get_mean_documents(cluster.map(&:to_i))			
+			end
+			@clustered_documents = @clustered_documents_map.each_with_index.map do |cluster,i|
+				cluster.map do |doc|
+					doc_clusters[i][doc].to_i
+				end
+			end
+			@clustered_documents =  @clustered_documents[0].zip(*@clustered_documents[1..-1]).flatten.uniq.compact	
+			@contents = @clustered_documents.map do |doc|
+				@contents[doc]
 			end
 		end
-		@clustered_documents =  @clustered_documents[0].zip(*@clustered_documents[1..-1]).flatten.uniq.compact	
 	end
 
 
